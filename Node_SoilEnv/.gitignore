@@ -1,0 +1,5 @@
+
+.pio
+.include/
+.vscode/
+.test/
