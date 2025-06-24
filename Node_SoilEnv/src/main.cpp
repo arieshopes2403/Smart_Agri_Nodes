@@ -6,8 +6,8 @@
 #include "SerialPrint.h"
 #include <SoftwareSerial.h>
 
-#define RX 3  
-#define TX 2  
+#define RX 4  
+#define TX 3  
 
 SensorManager sensor;
 DisplayManager display;
@@ -19,7 +19,7 @@ void setup() {
     Wire.begin();
     sensor.begin();
     display.begin();
-    // Serial.println("Node 01 ready...");
+    Serial.println("Node 01 ready...");
 }
 
 void loop() {
@@ -29,29 +29,24 @@ void loop() {
 
     String jsonData;
 
-    SerialPrint::printData(temp, humi, lux);
-    display.show(temp, humi, lux);
+    // SerialPrint::printData(temp, humi, lux);
+    // display.show(temp, humi, lux);
     Serial.print("abc----------");
-    // if (!isnan(temp) && !isnan(humi) && !isnan(lux)) {
-    //     // data ok ne 
-    //     jsonData = "{\"id\":\"01\",\"temp\":" + String(temp, 1) +
-    //                ",\"humi\":" + String(humi, 1) +
-    //                ",\"light\":" + String(lux, 0) + "}*";
+    if (!isnan(temp) && !isnan(humi) && !isnan(lux)) {
+        // data ok ne 
+        jsonData = "{\"id\":\"1\",\"temp\":" + String(temp, 1) +
+                   ",\"humi\":" + String(humi, 1) +
+                   ",\"light\":" + String(lux, 0) + "}*";
 
-    //     Serial.println("Sending data: " + jsonData);
-    //     zigbeeSerial.print(jsonData);
+        Serial.println("Sending data: " + jsonData);
+        zigbeeSerial.print(jsonData);
         
-    // } else {
-    //     // send error
-    //     jsonData = "{\"id\":\"0\"}*";
-    //     Serial.println("Sensor error → Sending: " + jsonData);
-    //     zigbeeSerial.print(jsonData);
-    // }
-
-    // String data_send = "hello ESP8266 nhe";
-    // zigbeeSerial.println(data_send);
-
-    // String json_Data ="{\"a"}";
+    } else {
+        // send error
+        jsonData = "{\"id\":\"0\"}*";
+        Serial.println("Sensor error → Sending: " + jsonData);
+        zigbeeSerial.print(jsonData);
+    }
 
     delay(3000);  
 }
