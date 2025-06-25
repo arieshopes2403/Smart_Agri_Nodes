@@ -22,7 +22,7 @@ void loop() {
 
       String id = parseString(incoming, "id");
 
-      if (id == "01") {
+      if (id == "1") {
         float temp = parseValue(incoming, "temp");
         float humi = parseValue(incoming, "humi");
         float light = parseValue(incoming, "light");
